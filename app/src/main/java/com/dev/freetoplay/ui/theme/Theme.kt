@@ -48,7 +48,7 @@ fun FreeToPlayTheme(
 ) {
     MaterialTheme(
         colors = if (darkTheme) DarkThemeColors else LightThemeColors,
-        typography = RobotoTypography,
+        typography = KaiseioptiTypography,
         shapes = AppShapes,
     ) {
         Box(
