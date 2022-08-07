@@ -1,4 +1,4 @@
-package com.dev.freetoplay.ui.theme
+package com.dev.freetoplay.presentation.theme
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.dev.freetoplay.ui.theme
+package com.dev.freetoplay.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
