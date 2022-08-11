@@ -9,7 +9,7 @@ import javax.inject.Inject
 class ApiBuilder @Inject constructor() {
 
     companion object {
-        const val API_BASE_URL: String = "https://wwww.freetogame.com/api/"
+        const val API_BASE_URL: String = "https://www.freetogame.com/api/"
         const val CONNECTION_TIMEOUT = 1L
         const val READ_TIMEOUT = 1L
         const val WRITE_TIMEOUT = 15L

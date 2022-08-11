@@ -15,7 +15,7 @@ data class GameDto(
     val publisher: String,
     @SerializedName("release_date")
     val releaseDate: String,
-    @SerializedName("shortDescription")
+    @SerializedName("short_description")
     val shortDescription: String,
     val thumbnail: String,
     val title: String

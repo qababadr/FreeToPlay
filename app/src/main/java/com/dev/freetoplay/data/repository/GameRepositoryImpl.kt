@@ -7,7 +7,7 @@ import com.dev.freetoplay.util.Resource
 import javax.inject.Inject
 
 class GameRepositoryImpl @Inject constructor(
-    val api: Api
+    private val api: Api
 ): BaseRepository(), GameRepository {
 
 

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dev.freetoplay">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="com.dev.freetoplay.application.FreeToPlayApplication"
         android:allowBackup="true"
@@ -12,13 +14,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FreeToPlay"
+        android:theme="@style/Theme.SplashScreen"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.activity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FreeToPlay">
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
