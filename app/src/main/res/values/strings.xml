@@ -5,8 +5,8 @@
     <string name="lbl_web_games">Web Browser games</string>
     <string name="lbl_latest_games">Latest games</string>
     <string name="wrn_no_games">Oops...! it seems that there is no games for the moment please try again</string>
-    <string name="lbl_about">About</string>
-    <string name="lbl_detail">detail</string>
+    <string name="lbl_about">About %1$s</string>
+    <string name="lbl_detail">%1$s detail</string>
     <string name="lbl_extra">Extra</string>
     <string name="lbl_title">Title</string>
     <string name="lbl_developer">Developer</string>
@@ -19,7 +19,7 @@
     <string name="lbl_memory">Memory</string>
     <string name="lbl_storage">Storage</string>
     <string name="lbl_graphics">Graphics</string>
-    <string name="lbl_developer_copyright">All material on this page is copyrighted by (%1$s) and their respective licensors. All other trademarks are the property of their respective owners.</string>
+    <string name="lbl_developer_copyright">All material on this page is copyrighted by %1$s and their respective licensors. All other trademarks are the property of their respective owners.</string>
     <string name="lbl_play_the_game">Play the game</string>
     <string name="lbl_loading">Loading</string>
     <string name="lbl_search">Search</string>

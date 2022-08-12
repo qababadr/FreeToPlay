@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.dev.freetoplay.R
 
 @Composable
-fun EmptyResult(
+fun WarningMessage(
     @StringRes textId: Int,
     extraText: String = ""
 ){

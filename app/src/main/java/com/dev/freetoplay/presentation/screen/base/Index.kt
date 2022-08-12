@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,6 +34,7 @@ fun Index(
     onOpenDrawer: () -> Unit,
     onSearchButtonClick: () -> Unit,
     onGameClick: (Int) -> Unit,
+    onPlayTheGameClicked: (String) -> Unit
 ){
     Scaffold(
         scaffoldState = scaffoldState,
@@ -135,7 +135,11 @@ fun Index(
             composable(route = Screen.GameDetailScreen.route){
                 val viewModel = hiltViewModel<GameDetailViewModel>()
                 GameDetailScreen(
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    navController = navController,
+                    onPlayTheGameClicked = { gameUrl ->
+                        onPlayTheGameClicked(gameUrl)
+                    }
                 )
             }
         }

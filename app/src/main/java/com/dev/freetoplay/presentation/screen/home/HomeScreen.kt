@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.dev.freetoplay.R
 import com.dev.freetoplay.domain.model.Game
 import com.dev.freetoplay.presentation.component.CarouselView
-import com.dev.freetoplay.presentation.component.EmptyResult
+import com.dev.freetoplay.presentation.component.WarningMessage
 import com.dev.freetoplay.presentation.component.GameCard
 import com.dev.freetoplay.util.Resource
 import com.dev.freetoplay.util.getUrls
@@ -36,7 +36,7 @@ fun HomeScreen(
                LocalDensity.current.density
 
        if(games.isEmpty()){
-            EmptyResult(textId = R.string.wrn_no_games)
+            WarningMessage(textId = R.string.wrn_no_games)
        }
        else{
            Column(
