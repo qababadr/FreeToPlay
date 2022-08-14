@@ -9,4 +9,8 @@ interface GameRepository {
     suspend fun getAllGames(): Resource<List<Game>>
 
     suspend fun getGame(id: Int): Resource<GameDetail?>
+
+    suspend fun getGamesByPlatform(platform :String): Resource<List<Game>>
+
+    suspend fun sortGames(criteria: String): Resource<List<Game>>
 }

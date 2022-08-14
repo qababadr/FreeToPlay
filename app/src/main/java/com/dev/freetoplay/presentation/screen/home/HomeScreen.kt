@@ -19,6 +19,7 @@ import com.dev.freetoplay.domain.model.Game
 import com.dev.freetoplay.presentation.component.CarouselView
 import com.dev.freetoplay.presentation.component.WarningMessage
 import com.dev.freetoplay.presentation.component.GameCard
+import com.dev.freetoplay.presentation.component.TopBar
 import com.dev.freetoplay.util.Resource
 import com.dev.freetoplay.util.getUrls
 import com.dev.freetoplay.util.header
@@ -42,28 +43,10 @@ fun HomeScreen(
            Column(
                modifier = Modifier.fillMaxSize()
            ) {
-               Row(
-                   modifier = Modifier
-                       .fillMaxWidth()
-                       .padding(all = 16.dp),
-                   verticalAlignment = Alignment.CenterVertically,
-                   horizontalArrangement = Arrangement.SpaceBetween
-               ) {
-                   IconButton(onClick = { onOpenDrawer() }) {
-                       Icon(
-                           painter = painterResource(id = R.drawable.ic_menu),
-                           contentDescription = "",
-                           tint = MaterialTheme.colors.onBackground
-                       )
-                   }
-                   IconButton(onClick = { onSearchButtonClick() }) {
-                       Icon(
-                           painter = painterResource(id = R.drawable.ic_magnifying_glass_solid),
-                           contentDescription = "",
-                           tint = MaterialTheme.colors.onBackground
-                       )
-                   }
-               }
+               TopBar(
+                   onOpenDrawer = onOpenDrawer,
+                   onSearchButtonClick = onSearchButtonClick
+               )
 
                LazyVerticalGrid(columns = GridCells.Fixed(count = 2)){
                    header{
@@ -80,7 +63,8 @@ fun HomeScreen(
                    }
                    items(items = games){ game ->
                        GameCard(
-                           modifier = Modifier.padding(all = 8.dp)
+                           modifier = Modifier
+                               .padding(all = 8.dp)
                                .requiredHeight(height = screenHeight * 0.45f),
                            game = game,
                            onClick = { onGameClick(game.id) }
