@@ -81,6 +81,13 @@ class SearchViewModel @Inject constructor(
         _searchDetailVisible.value = true
     }
 
+    fun setRoute(route: String){
+        savedStateHandle.set(
+            key = CURRENT_ROUTE_KEY,
+            value = route
+        )
+    }
+
     private fun getGamesByPlatform(filter: String) {
         viewModelScope.launch {
             _isLoading.send(true)
@@ -104,5 +111,4 @@ class SearchViewModel @Inject constructor(
             _isLoading.send(false)
         }
     }
-
 }

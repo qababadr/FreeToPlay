@@ -4,15 +4,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.dev.freetoplay.R
 import com.dev.freetoplay.domain.model.Game
@@ -27,7 +23,7 @@ import com.dev.freetoplay.util.header
 @Composable
 fun HomeScreen(
     onOpenDrawer: () -> Unit,
-    onSearchButtonClick: () -> Unit,
+    onSearchButtonClick: (List<Game>) -> Unit,
     onGameClick: (Int) -> Unit,
     availableGames: Resource<List<Game>>
 ) {
@@ -45,7 +41,7 @@ fun HomeScreen(
            ) {
                TopBar(
                    onOpenDrawer = onOpenDrawer,
-                   onSearchButtonClick = onSearchButtonClick
+                   onSearchButtonClick = { onSearchButtonClick(games) }
                )
 
                LazyVerticalGrid(columns = GridCells.Fixed(count = 2)){

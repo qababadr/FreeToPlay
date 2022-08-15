@@ -35,12 +35,13 @@ fun CarouselView(
     Box(
         modifier = modifier,
         contentAlignment = Alignment.TopCenter
-    ){
+    ) {
         val pagerState = rememberPagerState(pageCount = urls.size)
 
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .fillMaxHeight()
                 .clip(shape = shape)
         ) { index ->
@@ -48,7 +49,8 @@ fun CarouselView(
                 url = urls[index],
                 crossFade = crossFade,
                 contentScale = contentScale,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .fillMaxHeight(),
                 onLoading = {
                     ConstraintLayout(
@@ -66,18 +68,24 @@ fun CarouselView(
                     }
                 },
                 onError = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_warning),
-                        contentDescription = "",
-                        tint = Color.Red
-                    )
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_warning),
+                            contentDescription = "",
+                            tint = Color.Red
+                        )
+                    }
                 }
             )
         }
         HorizontalPagerIndicator(
             activeColor = pagerIndicatorColor,
             pagerState = pagerState,
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
                 .background(color = Color.Transparent)
                 .padding(bottom = 5.dp)
         )

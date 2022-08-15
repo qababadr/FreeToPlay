@@ -18,8 +18,8 @@ import com.dev.freetoplay.presentation.component.SearchSuggestions
 fun SearchMode(
     isLoading: Boolean,
     searchSuggestions: List<Game>,
-    navController: NavHostController,
     focusManager: FocusManager,
+    onItemClick: (Int) -> Unit,
     onClearQuery: () -> Unit,
     onSearch: (String) -> Unit,
     search: () -> Unit,
@@ -43,17 +43,13 @@ fun SearchMode(
            SearchSuggestions(
                query = query,
                searchResult = searchSuggestions,
-               onClick =  { id ->
-                   navController.navigate(route = "gameDetail/$id")
-               }
+               onClick =  { onItemClick(it) }
            )
        } else{
            SearchDetail(
                query = query,
                searchResult = searchSuggestions,
-               onClick = { id ->
-                   navController.navigate(route = "gameDetail/$id")
-               }
+               onClick = { onItemClick(it) }
            )
        }
 

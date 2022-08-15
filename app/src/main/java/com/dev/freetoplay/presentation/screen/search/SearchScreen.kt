@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import com.dev.freetoplay.domain.model.Game
 import com.dev.freetoplay.util.ALL_GAMES_KEY
 import com.dev.freetoplay.util.SEARCH_MODE_KEY
+import com.dev.freetoplay.util.navigate
 import kotlinx.coroutines.launch
 
 @Composable
@@ -49,7 +50,6 @@ fun SearchScreen(
                 focusManager = focusManager,
                 searchDetailVisible = searchDetailVisible,
                 searchSuggestions = availableGames,
-                navController = navController,
                 query = searchQuery,
                 onClearQuery = {
                     viewModel.clearSearchQuery()
@@ -65,6 +65,15 @@ fun SearchScreen(
                     if(searchQuery.isNotEmpty()){
                         viewModel.showSearchDetail()
                     }
+                },
+                onItemClick = { id ->
+                    val route = "gameDetail/$id"
+                    navController.navigate(
+                        route = route,
+                        onNavigate = {
+                            viewModel.setRoute(route = route)
+                        }
+                    )
                 }
             )
         } else{
@@ -72,7 +81,13 @@ fun SearchScreen(
                 isLoading = isLoading,
                 games = availableGames,
                 onGameClick = { id ->
-                    navController.navigate(route = "gameDetail/$id")
+                    val route = "gameDetail/$id"
+                    navController.navigate(
+                        route = route,
+                        onNavigate = {
+                            viewModel.setRoute(route = route)
+                        }
+                    )
                 },
                 onOpenDrawer = {
                      scope.launch {
@@ -84,7 +99,13 @@ fun SearchScreen(
                         key = ALL_GAMES_KEY,
                         value = availableGames
                     )
-                    navController.navigate(route = "search?mode=$SEARCH_MODE_KEY")
+                    val route = "search?mode=$SEARCH_MODE_KEY"
+                    navController.navigate(
+                        route = route,
+                        onNavigate = {
+                            viewModel.setRoute(route = route)
+                        }
+                    )
                 }
             )
         }

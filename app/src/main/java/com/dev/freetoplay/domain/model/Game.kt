@@ -1,5 +1,9 @@
 package com.dev.freetoplay.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Game(
     val developer: String,
     val freeToGameProfileUrl: String,
@@ -12,4 +16,4 @@ data class Game(
     val shortDescription: String,
     val thumbnail: String,
     val title: String
-)
+): Parcelable

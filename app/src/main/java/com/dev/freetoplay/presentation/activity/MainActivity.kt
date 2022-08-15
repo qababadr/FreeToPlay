@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,10 +34,26 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             val scaffoldState = rememberScaffoldState()
+
             val navController = rememberNavController()
-            val availableGames by mainViewModel.games.collectAsState()
+
+            val availableGames by mainViewModel.games
+                .collectAsState()
+
             val scope = rememberCoroutineScope()
+
             val uriHandler = LocalUriHandler.current
+
+            val route by mainViewModel.currentRoute
+                .collectAsState()
+
+            if (route.isNotEmpty()) {
+                LaunchedEffect(key1 = route) {
+                    navController.navigate(route = route){
+                        launchSingleTop = true
+                    }
+                }
+            }
 
             FreeToPlayTheme(
                 darkTheme = isSystemInDarkTheme()
@@ -50,47 +67,77 @@ class MainActivity : ComponentActivity() {
                             scaffoldState.drawerState.open()
                         }
                     },
-                    onSearchButtonClick = {
-                        scope.launch {
-                            val path = "search?mode=$SEARCH_MODE_KEY"
-                            navController.currentBackStackEntry?.savedStateHandle?.set(
-                                key = ALL_GAMES_KEY,
-                                value = availableGames.data?: emptyList()
-                            )
-                            navController.navigate(route = path)
-                        }
+                    onSearchButtonClick = { games ->
+                        val path = "search?mode=$SEARCH_MODE_KEY"
+                        navController.navigate(
+                            route = path,
+                            onNavigate = {
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    key = ALL_GAMES_KEY,
+                                    value = games
+                                )
+                                mainViewModel.setRoute(route = path)
+                            }
+                        )
                     },
                     onGameClick = { gameId ->
-                        navController.navigate(route = "gameDetail/$gameId")
+                        val path = "gameDetail/$gameId"
+                        navController.navigate(
+                            route = path,
+                            onNavigate = {
+                                mainViewModel.setRoute(route = path)
+                            }
+                        )
                     },
                     onPlayTheGameClicked = { gameUrl ->
                         uriHandler.openUri(uri = gameUrl)
                     },
                     onHomeMenuClick = {
                         scope.launch {
-                            scaffoldState.drawerState.close()
-                            navController.navigate(route = Screen.HomeScreen.route)
+                            val path = Screen.HomeScreen.route
+                            navController.navigate(
+                                route = path,
+                                onNavigate = {
+                                    mainViewModel.setRoute(route = path)
+                                    scaffoldState.drawerState.close()
+                                }
+                            )
                         }
                     },
                     onPCGamesClick = {
                         scope.launch {
                             val path = "search?mode=$FILTER_MODE_KEY&filter=$PC_GAMES"
-                            scaffoldState.drawerState.close()
-                            navController.navigate(route = path)
+                            navController.navigate(
+                                route = path,
+                                onNavigate = {
+                                    mainViewModel.setRoute(route = path)
+                                    scaffoldState.drawerState.close()
+                                }
+                            )
                         }
                     },
                     onWebGamesClick = {
                         scope.launch {
                             val path = "search?mode=$FILTER_MODE_KEY&filter=$BROWSER_GAMES"
-                            scaffoldState.drawerState.close()
-                            navController.navigate(route = path)
+                            navController.navigate(
+                                route = path,
+                                onNavigate = {
+                                    mainViewModel.setRoute(route = path)
+                                    scaffoldState.drawerState.close()
+                                }
+                            )
                         }
                     },
                     onLatestGamesClick = {
                         scope.launch {
                             val path = "search?mode=$FILTER_MODE_KEY&filter=$LATEST_GAMES"
-                            scaffoldState.drawerState.close()
-                            navController.navigate(route = path)
+                            navController.navigate(
+                                route = path,
+                                onNavigate = {
+                                    mainViewModel.setRoute(route = path)
+                                    scaffoldState.drawerState.close()
+                                }
+                            )
                         }
                     }
                 )

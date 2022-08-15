@@ -6,6 +6,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
@@ -38,7 +39,7 @@ fun Index(
     navController: NavHostController,
     availableGames: Resource<List<Game>>,
     onOpenDrawer: () -> Unit,
-    onSearchButtonClick: () -> Unit,
+    onSearchButtonClick: (List<Game>) -> Unit,
     onGameClick: (Int) -> Unit,
     onPlayTheGameClicked: (String) -> Unit,
     onHomeMenuClick: () -> Unit,
@@ -126,7 +127,7 @@ fun Index(
             composable(route = Screen.HomeScreen.route) {
                 HomeScreen(
                     onOpenDrawer = { onOpenDrawer() },
-                    onSearchButtonClick = { onSearchButtonClick() },
+                    onSearchButtonClick = { onSearchButtonClick(it) },
                     onGameClick = { gameId ->
                         onGameClick(gameId)
                     },
@@ -134,9 +135,9 @@ fun Index(
                 )
             }
             composable(route = Screen.GameDetailScreen.route) {
-                val viewModel = hiltViewModel<GameDetailViewModel>()
+                val gameDetailViewModel = hiltViewModel<GameDetailViewModel>()
                 GameDetailScreen(
-                    viewModel = viewModel,
+                    viewModel = gameDetailViewModel,
                     navController = navController,
                     onPlayTheGameClicked = { gameUrl ->
                         onPlayTheGameClicked(gameUrl)
@@ -152,12 +153,12 @@ fun Index(
                     }
                 )
             ) {
-                val viewModel = hiltViewModel<SearchViewModel>()
+                val searchViewModel = hiltViewModel<SearchViewModel>()
                 val games =
                     navController.previousBackStackEntry?.savedStateHandle?.get<List<Game>>(key = ALL_GAMES_KEY)
                         ?: emptyList()
                 SearchScreen(
-                    viewModel = viewModel,
+                    viewModel = searchViewModel,
                     navController = navController,
                     scaffoldState = scaffoldState,
                     games = games,
