@@ -35,9 +35,9 @@ private val DarkThemeColors = darkColors(
     secondary = Color(0xFF46807E),
     secondaryVariant = Color(0xFF75b0ad),
     error = RedErrorLight,
-    background = Color.Black,
+    background = Black2,
     onBackground = Color.White,
-    surface = Black1,
+    surface = Black3,
     onSurface = Color.White,
 )
 
