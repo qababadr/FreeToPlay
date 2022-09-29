@@ -39,5 +39,4 @@ class ApiBuilder @Inject constructor() {
                     .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             }.build()
     }
-
 }
